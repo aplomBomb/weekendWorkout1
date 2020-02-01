@@ -1,0 +1,13 @@
+{
+  "name": "CheckbookBalancer",
+  "version": "1.0",
+  "description": "A script for parsing and calculating dirty data into an organized and balanced checkbook",
+  "main": "index.js",
+  "repository": "git@github.com:aplomBomb/weekendWorkout1.git",
+  "author": "aplombomb <seizethesteez@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "jest": "^25.1.0"
+  }
+}
