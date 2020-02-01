@@ -1,4 +1,4 @@
-### Take a dirty string of values and random non-alpha-numeric characters and return a balanced checkbook of sorts.
+### Take a dirty string of values and random non-alpha-numeric characters and return a balanced checkbook of sorts, writes to 'results.txt'.
 
 
 #### Input:
