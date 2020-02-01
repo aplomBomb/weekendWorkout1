@@ -1,6 +1,9 @@
 const fs = require("fs");
 
-const giveThePeopleWhatTheyWant = ( //4. Prepare and serve
+const dirtyData = fs.readFileSync("./data.txt");
+
+const giveThePeopleWhatTheyWant = (
+  //4. Prepare and serve
   theGoods,
   initialBalance,
   medianExpense,
@@ -14,18 +17,24 @@ const giveThePeopleWhatTheyWant = ( //4. Prepare and serve
       ` | Balance: ${parseFloat(initialBalance).toFixed(2)}`
     );
   });
-  const addInitial = updatedShit.unshift(`Starting balance: ${startingBalance.toFixed(2)}`);
+  const addInitial = updatedShit.unshift(
+    `Starting balance: ${startingBalance.toFixed(2)}`
+  );
   const addBottomFields = updatedShit.push(
     `Total expense: ${totalExpense.toFixed(2)}`,
     `Median expense: ${medianExpense.toFixed(2)}`
   );
 
-  const finalData = updatedShit.toString().split(',').join('\n')
+  const finalData = updatedShit
+    .toString()
+    .split(",")
+    .join("\n");
 
-  fs.writeFileSync('results.txt', finalData)
+  fs.writeFileSync("results.txt", finalData);
 };
 
-const doTheCrunchin = theGoods => {  //3. Snag the good stuff
+const doTheCrunchin = theGoods => {
+  //3. Snag the good stuff
   const initialBalance = parseFloat(theGoods[0][0]);
   theGoods.shift();
   const medianExpense =
@@ -44,20 +53,23 @@ const doTheCrunchin = theGoods => {  //3. Snag the good stuff
   );
 };
 
-const arrayarizeTheDosh = cleanData => { //2. Organize it
+const arrayarizeTheDosh = cleanData => {
+  //2. Organize it
   const brokenUpShit = cleanData.map(line => {
     return line.split(" ");
   });
   doTheCrunchin(brokenUpShit);
 };
 
-const scrubScrub = () => { //1. Clean it up
-  const cleanData = fs
-    .readFileSync("./data.txt")
+const scrubScrub = dirtyData => {
+  //1. Clean it up
+  const cleanData = dirtyData
     .toString()
     .replace(/[^a-zA-Z0-9\s\. :]/g, "")
     .split("\n");
   arrayarizeTheDosh(cleanData);
 };
 
-scrubScrub();
+scrubScrub(dirtyData);
+
+module.exports = { scrubScrub };
