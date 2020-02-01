@@ -1,48 +1,57 @@
 const fs = require("fs");
 
-const giveThePeopleWhatTheyWant = (
-  
-  theShit,
+const giveThePeopleWhatTheyWant = ( //4. Prepare and serve
+  theGoods,
   initialBalance,
   medianExpense,
-  totalExpense,
-  remainder
+  totalExpense
 ) => {
-       
+  const startingBalance = initialBalance;
+  console.log("startingBalance: ", startingBalance);
+  updatedShit = theGoods.map(item => {
+    initialBalance = parseFloat(initialBalance) - parseFloat(item[2]);
+    return (
+      item.toString().replace(/\,/g, " ") +
+      ` | Balance: ${parseFloat(initialBalance).toFixed(2)}`
+    );
+  });
+  console.log("totalexpense: ", totalExpense.toFixed(2));
+  const addInitial = updatedShit.unshift(`Starting balance: ${startingBalance.toFixed(2)}`);
+  const addBottomFields = updatedShit.push(
+    `Total expense: ${totalExpense.toFixed(2)}`,
+    `Median expense: ${medianExpense.toFixed(2)}`
+  );
+
+  console.log("updatedShit: ", updatedShit);
 };
 
-const doTheCrunchin = theShit => {
-  
-  const initialBalance = parseFloat(theShit[0][0]);
-  theShit.shift();
+const doTheCrunchin = theGoods => {  //3. Snag the good stuff
+  const initialBalance = parseFloat(theGoods[0][0]);
+  theGoods.shift();
   const medianExpense =
-    theShit
+    theGoods
       .map(item => parseFloat(item[2]))
-      .reduce((acc, currentValue) => acc + currentValue) / theShit.length;
-  const totalExpense = theShit
+      .reduce((acc, currentValue) => acc + currentValue) / theGoods.length;
+  const totalExpense = theGoods
     .map(item => parseFloat(item[2]))
     .reduce((acc, currentValue) => acc + currentValue);
-  const remainder = initialBalance - totalExpense
 
   giveThePeopleWhatTheyWant(
-    theShit,
+    theGoods,
     initialBalance,
     medianExpense,
-    totalExpense,
-    remainder
+    totalExpense
   );
 };
 
-const arrayarizeTheDosh = cleanData => {
+const arrayarizeTheDosh = cleanData => { //2. Organize it
   const brokenUpShit = cleanData.map(line => {
-    
     return line.split(" ");
   });
   doTheCrunchin(brokenUpShit);
 };
 
-const scrubScrub = () => {
-  
+const scrubScrub = () => { //1. Clean it up
   const cleanData = fs
     .readFileSync("./data.txt")
     .toString()
