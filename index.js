@@ -7,7 +7,6 @@ const giveThePeopleWhatTheyWant = ( //4. Prepare and serve
   totalExpense
 ) => {
   const startingBalance = initialBalance;
-  console.log("startingBalance: ", startingBalance);
   updatedShit = theGoods.map(item => {
     initialBalance = parseFloat(initialBalance) - parseFloat(item[2]);
     return (
@@ -15,14 +14,15 @@ const giveThePeopleWhatTheyWant = ( //4. Prepare and serve
       ` | Balance: ${parseFloat(initialBalance).toFixed(2)}`
     );
   });
-  console.log("totalexpense: ", totalExpense.toFixed(2));
   const addInitial = updatedShit.unshift(`Starting balance: ${startingBalance.toFixed(2)}`);
   const addBottomFields = updatedShit.push(
     `Total expense: ${totalExpense.toFixed(2)}`,
     `Median expense: ${medianExpense.toFixed(2)}`
   );
 
-  console.log("updatedShit: ", updatedShit);
+  const finalData = updatedShit.toString().split(',').join('\n')
+
+  fs.writeFileSync('results.txt', finalData)
 };
 
 const doTheCrunchin = theGoods => {  //3. Snag the good stuff
