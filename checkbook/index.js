@@ -68,6 +68,7 @@ const scrubScrub = dirtyData => {
     .replace(/[^a-zA-Z0-9\s\. :]/g, "")
     .split("\n");
   arrayarizeTheDosh(cleanData);
+  return cleanData
 };
 
 scrubScrub(dirtyData);

@@ -1,6 +1,0 @@
-Starting balance: 100.00
-125 Manga 5.00 | Balance: 95.00
-123 Skateboard 5.00 | Balance: 90.00
-127 Pogs 5.00 | Balance: 85.00
-Total expense: 15.00
-Median expense: 5.00
